@@ -157,6 +157,33 @@ T add_emp(int option)
 
 /* SHOWING EMPLOYEES */
 
+template <typename T>
+/* int i -> current index of showing
+ * T - vector of employee objects (full time, part time, intern)
+ * int option -> 1 - show message of printing full time employees
+ *               2 - part time
+ *               3 - intern
+ */
+void show_empl(int i, vector<T> &empl, int option)
+{
+    if(empl.empty())
+    {
+        if(option == 1)
+            cout << "No Full time employees.\n\n";
+        else if(option == 2)
+            cout << "No Part time employees.\n\n";
+        else if(option == 3)
+            cout << "No Internship employees.\n\n";
+    }
+    else
+    {
+        if(i > empl.size())
+        {
+            cout << empl[i] << '\n';
+        }
+    }
+}
+
 
 int get_showing_option()
 {
@@ -165,8 +192,8 @@ int get_showing_option()
 	cout << "You're in the showing employee(s) section\n\n";
 	cout << "1: Show all employees" << '\n';
 	cout << "2: Show first n employees" << '\n';
-	cout << "3: Show employee by id" << '\n';
-	cout << "4: Show employee by name" << '\n';
+	cout << "3: Show employee by id (in development)" << '\n';
+	cout << "4: Show employee by name (in development)" << '\n';
 	cout << "-1: Step back" << '\n';
 
 	string message = "Please, pick an option: ";
@@ -232,9 +259,90 @@ void show_all_emp(vector<Full_time_employee>& full, vector<Part_time_employee>& 
 }
 
 
-void show_n_emp()
+void show_n_emp(vector<Full_time_employee>& full, vector<Part_time_employee>& part, vector<Intern_employee>& intern)
 {
+    cout << "Which employee to show?\n\n";
+    cout << "1: Full time employee" << '\n';
+    cout << "2: Part time employee" << '\n';
+    cout << "3: Internship employee" << '\n';
+    cout << "4: All employees " << '\n';
+    cout << "-1: Step back" << '\n';
 
+    string message = "Please, pick an option: ";
+    int option = get_and_validate_conversion(vector<int>{1, 2, 3, 4, -1}, message);
+    cout << '\n';
+
+    string message2 = "How many to show? ";
+    int how_many_show = get_and_validate_conversion(vector<int>{}, message2);
+
+    cout << "##################################\n\n";
+
+    int kill = 0;
+
+    if(full.size() + part.size() + intern.size() == 0)
+    {
+        cout << "No employees! \n\n";
+    }
+    else
+    {
+        for(int i=0; i<how_many_show; i++)
+        {
+            if(kill == 1)
+                break;
+
+            switch(option) {
+                case 1: {
+                    show_empl(i, full, 1);
+
+                    if (i >= full.size()) {
+                        cout << "##################################\n\n";
+                        kill = 1;
+                        break;
+                    }
+                    break;
+                }
+                case 2: {
+                    show_empl(i, part, 2);
+
+                    if (i >= part.size()) {
+                        cout << "##################################\n\n";
+                        kill = 1;
+                        break;
+                    }
+                    break;
+                }
+                case 3: {
+                    show_empl(i, intern, 3);
+
+                    if (i >= intern.size()) {
+                        cout << "##################################\n\n";
+                        kill = 1;
+                        break;
+                    }
+                    break;
+                }
+                case 4: {
+                    if (i <= full.size()) // <= because when there are none employees, we want to print that.
+                        show_empl(i, full, 1);
+                    else if (i <= full.size() + part.size())
+                        show_empl(i, part, 2);
+                    else if (i <= full.size() + part.size() + intern.size())
+                        show_empl(i, intern, 3);
+
+                    // when to divide the sections
+                    if ((i == full.size()) || (i == full.size() + part.size()) ||
+                        (i == full.size() + part.size()) + intern.size())
+                        cout << "##################################\n\n";
+
+                    if (i == i <= full.size() + part.size() + intern.size()) {
+                        kill = 1;
+                        break;
+                    }
+                    break;
+                }
+            }
+        }
+    }
 }
 
 
@@ -260,11 +368,11 @@ int get_changing_option()
 {
 	int option;
 
-	cout << "You're in the change value of employee section\n\n";
-	cout << "1: Change id" << '\n';
-	cout << "2: Change name" << '\n';
-	cout << "3: Change salary" << '\n';
-	cout << "-1: Step back" << '\n';
+	cout << "You're in the change value of employee section (no yet)\n\n";
+	cout << "1: Change id (not yet)" << '\n';
+	cout << "2: Change name (not yet)" << '\n';
+	cout << "3: Change salary (not yet)" << '\n';
+	cout << "-1: Step back (not yet)" << '\n';
 
 	option = get_and_validate_conversion(vector<int>{1, 2, 3, -1});
 

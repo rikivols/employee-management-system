@@ -23,9 +23,9 @@ int main()
 		cout << "General navigation:\n\n";
 		cout << "1: Add employee" << '\n';
 		cout << "2: Show employees" << '\n';
-		cout << "3: Change value(s)" << '\n';
-		cout << "4: Delete employees" << '\n';
-		cout << "5: Show statistics" << '\n';
+		cout << "3: Change value(s) (not yet)" << '\n';
+		cout << "4: Delete employees (not yet)" << '\n';
+		cout << "5: Show statistics (not yet)" << '\n';
 		cout << "-1: End program" << '\n';
 
 		option = get_and_validate_conversion(vector<int>{ 1, 2, 3, 4, 5, -1 }, "Please, pick option: ");
@@ -96,7 +96,7 @@ int main()
                         show_all_emp(full_time_employees, part_time_employees, intern_employees);
                         break;
                     case 2:
-                        show_n_emp();
+                        show_n_emp(full_time_employees, part_time_employees, intern_employees);
                         break;
                     case 3:
                         show_by_id();
